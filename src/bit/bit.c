@@ -9,7 +9,8 @@ int main(int argc, const char *argv[])
   char string[100];
   //itoa(number, string, 2);
   itob(number, string);
-  printf("int = %ld, string = %s", number, string);
+  printf("asdfhahahah");
+  printf("int = %ld, string = %s\n", number, string);
   return 0;
 }
 
