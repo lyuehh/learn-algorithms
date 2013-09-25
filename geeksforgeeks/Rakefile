@@ -1,0 +1,25 @@
+require "erubis"
+
+desc 'help'
+task :help do
+end
+
+task :default => :help
+
+desc 'clean temp file'
+task :clean do
+    system "rm *.gcov"
+    system "rm *.gcda"
+    system "rm *.gcno"
+    system "rm a.out"
+end
+
+desc 'compile, then run'
+task :run do
+    f = ENV['file'] || ENV['f']
+    raise "need f= when rake run" unless f
+    system "cc -fprofile-arcs -ftest-coverage #{f}"
+    system "./a.out"
+    system "gcov #{f}"
+end
+

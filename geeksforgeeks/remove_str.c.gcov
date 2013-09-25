@@ -1,0 +1,90 @@
+        -:    0:Source:remove_str.c
+        -:    0:Graph:remove_str.gcno
+        -:    0:Data:remove_str.gcda
+        -:    0:Runs:0
+        -:    0:Programs:0
+        -:    1:#include <stdio.h>
+        -:    2:
+        -:    3:void replace(char *str) {
+        1:    4:    int i = 0;
+        1:    5:    char *q = str;
+        5:    6:    while(*q) {
+        3:    7:        if(*q == 'b') {
+        1:    8:            q++;
+        1:    9:        } else {
+        4:   10:            if(*q == 'c' && (str[i-1] == 'a' && i > 0)) {
+        1:   11:                q++;
+        1:   12:                i--;
+        1:   13:            } else {
+        1:   14:                str[i] = *q;
+        1:   15:                q++;
+        1:   16:                i++;
+        -:   17:            }
+        -:   18:        }
+        3:   19:    }
+        1:   20:    str[i] = '\0';
+        1:   21:}
+        -:   22:
+        -:   23:void swap(char a, char b) {
+        -:   24:    char temp;
+    #####:   25:    temp = a;
+    #####:   26:    a = b;
+    #####:   27:    b = temp;
+    #####:   28:}
+        -:   29:
+        -:   30:void removeBAndAC(char *p, int size) {
+    #####:   31:    int i = 0;
+    #####:   32:    int j = 0;
+        -:   33:
+    #####:   34:    while(i < size) {
+    #####:   35:        if(p[i] == 'b') {
+    #####:   36:            i++;
+    #####:   37:        } else if((p[i] == 'a') && (i + 1 < size) && (p[i+1] == 'c')) {
+    #####:   38:            i += 2;
+    #####:   39:        } else {
+    #####:   40:            if(i != j) swap(p[i], p[j]);
+    #####:   41:            i++;
+    #####:   42:            j++;
+        -:   43:        }
+    #####:   44:    }
+    #####:   45:    p[j] = '\0';
+    #####:   46:}
+        -:   47:
+        -:   48:void remove2(char *a, int n) {
+    #####:   49:    int k = 0;
+        -:   50:    int i;
+    #####:   51:    for(i=0;i<n;i++) {
+    #####:   52:        if(a[i] != 'b') {
+    #####:   53:            if(a[i] != 'a') {
+    #####:   54:                a[k++] = a[i];
+    #####:   55:            } else if((i+1) < n && a[i+1] == 'c') {
+    #####:   56:                i += 1;
+    #####:   57:            } else {
+    #####:   58:                a[k++] = a[i];
+        -:   59:            }
+    #####:   60:        }
+    #####:   61:    }
+    #####:   62:    if(k < n) {
+    #####:   63:        a[k] = '\0';
+    #####:   64:    }
+    #####:   65:}
+        -:   66:
+        -:   67:int main(int argc, const char *argv[])
+        -:   68:{
+    #####:   69:    char str1[] = "abc";
+    #####:   70:    char str2[] = "aaac";
+        -:   71:    //char str3[] = "c";
+        -:   72:
+        -:   73:    /* eliminate(str1); */
+        -:   74:    /* replace(str1); */
+        -:   75:    /* removeBAndAC(str1, 3); */
+    #####:   76:    remove2(str1, 3);
+    #####:   77:    remove2(str2, 4);
+        -:   78:    //replace(str2);
+        -:   79:    //replace(str3);
+        -:   80:
+    #####:   81:    printf("%s\n", str1);
+    #####:   82:    printf("%s\n", str2);
+        -:   83:    //printf("%s\n", str3);
+    #####:   84:    return 0;
+        -:   85:}

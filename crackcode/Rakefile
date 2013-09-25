@@ -1,0 +1,11 @@
+task :default => :run
+task :run do
+    Rake::Task['clean'].invoke
+    system 'javac T2.java'
+    system 'java T2'
+end
+
+task :clean do
+    system 'rm *.class'
+end
+
